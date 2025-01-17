@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('titles', function (Blueprint $table) {
             $table->id();
-            $table->string('isbn');
+            $table->string('isbn')->nullable()->unique();
             $table->string('title');
             $table->string('description');
             $table->string('publisher');
