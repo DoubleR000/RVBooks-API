@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTitleRequest;
+use App\Http\Requests\UpdateTitleRequest;
 use App\Http\Resources\TitleResource;
 use App\Models\Title;
 use Illuminate\Http\JsonResponse;
@@ -38,15 +39,19 @@ class TitleController extends Controller
      */
     public function show(Title $title)
     {
-        //
+        return new TitleResource($title);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Title $title)
+    public function update(UpdateTitleRequest $request, Title $title)
     {
-        //
+        $data = $request->validated();
+
+        $title->update($data);
+
+        return new TitleResource($title);
     }
 
     /**
@@ -54,6 +59,10 @@ class TitleController extends Controller
      */
     public function destroy(Title $title)
     {
-        //
+        $title->delete();
+
+        return response()->json([
+            "message" => "Title has been deleted."
+        ]);
     }
 }
