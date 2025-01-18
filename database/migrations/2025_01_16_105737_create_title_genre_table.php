@@ -12,15 +12,8 @@ return new class extends Migration {
     {
         Schema::create('title_genre', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("title_id");
-            $table->unsignedBigInteger("genre_id");
-
-            $table->foreign("title_id")
-                ->references("id")
-                ->on("titles");
-            $table->foreign("genre_id")
-                ->references("id")
-                ->on("genres");
+            $table->foreignIdFor(\App\Models\Title::class)->constrained();
+            $table->foreignIdFor(\App\Models\Genre::class)->constrained();
         });
     }
 
