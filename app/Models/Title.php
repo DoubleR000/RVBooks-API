@@ -16,4 +16,14 @@ class Title extends Model
         'publication_year',
         'publisher'
     ];
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
+    }
+
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
 }
