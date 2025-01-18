@@ -12,20 +12,13 @@ return new class extends Migration {
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('title_id')->constrained();
-            $table->foreignId('location_id')->constrained();
-            $table->unsignedBigInteger('status_id');
-            $table->unsignedBigInteger('condition_id');
+            $table->foreignIdFor(App\Models\Title::class)->constrained();
+            $table->foreignIdFor(App\Models\Location::class)->constrained();
+            $table->foreignIdFor(App\Models\BookStatus::class)->constrained();
+            $table->foreignIdFor(App\Models\BookCondition::class)->constrained();
             $table->dateTime('acquisition_date');
             $table->string('barcode');
 
-
-            $table->foreign('status_id')
-                ->references('id')
-                ->on('book_statuses');
-            $table->foreign('condition_id')
-                ->references('id')
-                ->on('book_conditions');
             $table->timestamps();
         });
     }
