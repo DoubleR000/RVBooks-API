@@ -62,7 +62,18 @@ class TitleController extends Controller
         $title->delete();
 
         return response()->json([
-            "message" => "Title data is marked for deletion."
+            "message" => "Title data is marked for deletion.",
+            "data" => new TitleResource($title)
+        ]);
+    }
+
+    public function restore(int $id)
+    {
+        $title = Title::restore($id);
+
+        return response()->json([
+            "message" => "Title data is restored.",
+            "data" => new TitleResource($title)
         ]);
     }
 }

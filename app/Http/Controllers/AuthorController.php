@@ -67,4 +67,14 @@ class AuthorController extends Controller
             "data" => new AuthorResource($author)
         ]);
     }
+
+    public function restore(int $id)
+    {
+        $author = Author::restore($id);
+
+        return response()->json([
+            "message" => "Author data is marked for deletion.",
+            "data" => new AuthorResource($author)
+        ]);
+    }
 }
