@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\TitleController;
 use Illuminate\Http\Request;
@@ -16,3 +17,4 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
 
 Route::apiResource('titles', TitleController::class);
+Route::apiResource('authors', AuthorController::class);
