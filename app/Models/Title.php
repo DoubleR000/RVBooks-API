@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\DeletedModels\Models\Concerns\KeepsDeletedModels;
 
 class Title extends Model
 {
-    use HasFactory;
+    use HasFactory, KeepsDeletedModels;
 
     protected $fillable = [
         'isbn',
