@@ -62,7 +62,7 @@ class TitleController extends Controller
         $title->delete();
 
         return response()->json([
-            "message" => "Title is marked for deletion."
+            "message" => "Title data is marked for deletion."
         ]);
     }
 }
