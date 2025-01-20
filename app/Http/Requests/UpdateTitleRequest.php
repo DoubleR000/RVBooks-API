@@ -12,7 +12,7 @@ class UpdateTitleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,8 @@ class UpdateTitleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'isbn' => ['nullable', new Isbn()],
-            'title' => 'string|required',
+            'isbn' => ['nullable', 'unique:titles', new Isbn()],
+            'title' => 'string',
             'description' => 'string|max:255|nullable',
             'publication_year' => 'date_format:Y|nullable',
             'publisher' => 'string|nullable'

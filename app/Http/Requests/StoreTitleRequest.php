@@ -23,7 +23,7 @@ class StoreTitleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'isbn' => ['nullable', new Isbn()],
+            'isbn' => ['nullable', 'unique:titles', new Isbn()],
             'title' => 'string|required',
             'description' => 'string|max:255|nullable',
             'publication_year' => 'date_format:Y|nullable',
