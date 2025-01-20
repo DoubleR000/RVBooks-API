@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\TitleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,6 @@ Route::post('titles/restore/{title}', [TitleController::class, 'restore'])->name
 
 Route::apiResource('authors', AuthorController::class);
 Route::post('authors/restore/{author}', [AuthorController::class, 'restore'])->name('authors.restore');
+
+Route::apiResource('genres', GenreController::class);
+Route::post('genres/restore/{genre}', [GenreController::class, 'restore'])->name('genres.restore');
