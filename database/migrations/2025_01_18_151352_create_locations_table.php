@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->foreignIdFor(\App\Models\Location::class, 'parent_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
