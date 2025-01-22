@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->foreignIdFor(\App\Models\Location::class, 'parent_id')->nullable()->constrained();
             $table->timestamps();
