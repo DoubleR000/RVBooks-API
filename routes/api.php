@@ -28,4 +28,4 @@ Route::apiResource('genres', GenreController::class);
 Route::post('genres/restore/{genre}', [GenreController::class, 'restore'])->name('genres.restore');
 
 Route::apiResource('locations', LocationController::class);
-Route::post('locations/restore/{location}', [GenreController::class, 'restore'])->name('genres.restore');
+Route::post('locations/restore/{location}', [LocationController::class, 'restore'])->name('genres.restore');
