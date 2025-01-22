@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookConditionController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LocationController;
@@ -28,4 +29,7 @@ Route::apiResource('genres', GenreController::class);
 Route::post('genres/restore/{genre}', [GenreController::class, 'restore'])->name('genres.restore');
 
 Route::apiResource('locations', LocationController::class);
-Route::post('locations/restore/{location}', [LocationController::class, 'restore'])->name('genres.restore');
+Route::post('locations/restore/{location}', [LocationController::class, 'restore'])->name('locations.restore');
+
+Route::apiResource('book-conditions', BookConditionController::class);
+Route::post('book-conditions/restore/{condition}', [BookConditionController::class, 'restore'])->name('book-conditions.restore');
