@@ -14,7 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->text('description')->nullable();
-            $table->foreignIdFor(\App\Models\Location::class, 'parent_id')->nullable()->constrained();
+            $table->foreignIdFor(\App\Models\Location::class, 'parent_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->timestamps();
         });
     }
