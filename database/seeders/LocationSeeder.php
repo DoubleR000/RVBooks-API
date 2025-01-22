@@ -17,27 +17,22 @@ class LocationSeeder extends Seeder
             [
                 'name' => 'Fiction',
                 'description' => 'All fiction books.',
-                'parent_id' => null,
             ],
             [
                 'name' => 'Kids',
                 'description' => 'Books for children.',
-                'parent_id' => null,
             ],
             [
                 'name' => 'Non-Fiction',
                 'description' => 'All non-fiction books.',
-                'parent_id' => null,
             ],
             [
                 'name' => 'Reference',
                 'description' => 'Reference materials.',
-                'parent_id' => null,
             ],
             [
                 'name' => 'Periodicals',
                 'description' => 'Magazines, journals, and newspapers.',
-                'parent_id' => null,
             ],
 
             // Fiction Sub-Locations
@@ -145,7 +140,7 @@ class LocationSeeder extends Seeder
             Location::firstOrCreate([
                 'name' => $location['name'],
                 'description' => $location['description'],
-                'parent_id' => $location['parent_id']
+                'parent_id' => $location['parent_id'] ?? null
             ]);
         }
     }
