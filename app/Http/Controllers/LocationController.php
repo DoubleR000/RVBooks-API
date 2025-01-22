@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLocationRequest;
+use App\Http\Requests\UpdateLocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Models\Location;
 use Illuminate\Http\Request;
@@ -22,12 +24,9 @@ class LocationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLocationRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'string|required',
-            'description' => 'string|nullable'
-        ]);
+        $validated = $request->validated();
 
         $location = Location::create($validated);
 
@@ -39,21 +38,17 @@ class LocationController extends Controller
      */
     public function show(Location $location)
     {
-        $locationData = Location::with('parent')->find($location->id);
+        $location->load('parent');
 
-        return new LocationResource($locationData);
+        return new LocationResource($location);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Location $location)
+    public function update(UpdateLocationRequest $request, Location $location)
     {
-        $validated = $request->validate([
-            'name' => 'string',
-            'description' => 'string|nullable',
-            'parent_id' => 'int|exists:locations|nullable'
-        ]);
+        $validated = $request->validated();
 
         $location->update($validated);
 
