@@ -11,8 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('titles', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('isbn')->nullable()->unique();
+            $table->string('slug')->unique();
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('publisher')->nullable();

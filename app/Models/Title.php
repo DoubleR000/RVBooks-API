@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\DeletedModels\Models\Concerns\KeepsDeletedModels;
 
 class Title extends Model
 {
-    use HasFactory, KeepsDeletedModels;
+    use HasUuids, HasFactory, KeepsDeletedModels, Sluggable;
 
     protected $fillable = [
         'isbn',
@@ -17,6 +19,20 @@ class Title extends Model
         'publication_year',
         'publisher'
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function genres()
     {
@@ -27,4 +43,6 @@ class Title extends Model
     {
         return $this->belongsToMany(Author::class);
     }
+
+
 }
