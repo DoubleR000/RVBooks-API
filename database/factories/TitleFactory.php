@@ -17,7 +17,10 @@ class TitleFactory extends Factory
     public function definition(): array
     {
         return [
-            'isbn' => fake()->isbn13(),
+            'isbn' => fake()->randomElement([
+                fake()->isbn10(),
+                fake()->isbn13()
+            ]),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'publication_year' => fake()->year(),
