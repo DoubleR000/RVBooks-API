@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookConditionController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TitleController;
@@ -33,3 +34,6 @@ Route::post('locations/restore/{location}', [LocationController::class, 'restore
 
 Route::apiResource('book-conditions', BookConditionController::class);
 Route::post('book-conditions/restore/{condition}', [BookConditionController::class, 'restore'])->name('book-conditions.restore');
+
+Route::apiResource('book-statuses', BookStatusController::class);
+Route::post('book-statuses/restore/{status}', [BookStatusController::class, 'restore'])->name('book-statuses.restore');
