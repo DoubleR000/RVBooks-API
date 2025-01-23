@@ -41,12 +41,7 @@ class BookConditionSeeder extends Seeder
         ];
 
         foreach ($bookConditions as $condition) {
-
-            BookCondition::firstOrCreate([
-                'name' => $condition['name'],
-                'description' => $condition['description'],
-            ]);
+            BookCondition::firstOrCreate($condition);
         }
-
     }
 }
