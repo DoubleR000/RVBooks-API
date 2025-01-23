@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->foreignIdFor(App\Models\BookStatus::class)->constrained();
             $table->foreignIdFor(App\Models\BookCondition::class)->constrained();
             $table->dateTime('acquisition_date');
-            $table->string('barcode');
 
             $table->timestamps();
         });
