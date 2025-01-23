@@ -15,7 +15,7 @@ class BookConditionController extends Controller
     {
         $bookConditions = BookCondition::all();
 
-        return BookConditionResource::make($bookConditions);
+        return BookConditionResource::collection($bookConditions);
     }
 
     /**
