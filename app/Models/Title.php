@@ -41,7 +41,7 @@ class Title extends Model
 
     public function authors()
     {
-        return $this->belongsToMany(Author::class);
+        return $this->belongsToMany(Author::class, 'title_author');
     }
 
 

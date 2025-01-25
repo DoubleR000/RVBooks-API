@@ -14,6 +14,17 @@ class TitleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'isbn' => $this->isbn,
+            'slug' => $this->slug,
+            'title' => $this->description,
+            'authors' => $this->whenLoaded(
+                'authors',
+                AuthorResource::collection($this->authors)
+            ),
+            'publisher' => $this->publisher,
+            'publication_year' => $this->publication_year
+        ];
     }
 }

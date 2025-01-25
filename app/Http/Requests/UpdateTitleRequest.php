@@ -27,7 +27,9 @@ class UpdateTitleRequest extends FormRequest
             'title' => 'string',
             'description' => 'string|max:255|nullable',
             'publication_year' => 'date_format:Y|nullable',
-            'publisher' => 'string|nullable'
+            'publisher' => 'string|nullable',
+            'author_ids' => 'array|nullable',
+            'author_ids.*' => 'exists:authors,id'
         ];
     }
 }

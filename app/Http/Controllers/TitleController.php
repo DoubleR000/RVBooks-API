@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTitleRequest;
 use App\Http\Requests\UpdateTitleRequest;
 use App\Http\Resources\TitleResource;
+use App\Http\Services\TitleService;
+use App\Models\Author;
 use App\Models\Title;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class TitleController extends Controller
     public function index(Request $request)
     {
         $itemsPerPage = $request->page_size ?? 20;
-        $titles = Title::paginate($itemsPerPage);
+        $titles = Title::with('authors')->paginate($itemsPerPage);
 
         return TitleResource::collection($titles);
     }
@@ -25,13 +27,13 @@ class TitleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTitleRequest $request)
+    public function store(StoreTitleRequest $request, TitleService $titleService)
     {
-        $data = $request->validated();
+        $validated = $request->validated();
 
-        $title = Title::create($data);
+        $title = $titleService->createTitleWithAuthor($validated);
 
-        return new TitleResource($title);
+        return TitleResource::make($title);
     }
 
     /**
@@ -39,19 +41,19 @@ class TitleController extends Controller
      */
     public function show(Title $title)
     {
-        return new TitleResource($title);
+        return TitleResource::make($title);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTitleRequest $request, Title $title)
+    public function update(UpdateTitleRequest $request, Title $title, TitleService $titleService)
     {
-        $data = $request->validated();
+        $validated = $request->validated();
 
-        $title->update($data);
+        $titleService->updateTitleWithAuthor($title, $validated);
 
-        return new TitleResource($title);
+        return TitleResource::make($title);
     }
 
     /**
@@ -61,10 +63,7 @@ class TitleController extends Controller
     {
         $title->delete();
 
-        return response()->json([
-            "message" => "Title data is marked for deletion.",
-            "data" => new TitleResource($title)
-        ]);
+        return response()->noContent();
     }
 
     public function restore(int $id)
@@ -73,7 +72,7 @@ class TitleController extends Controller
 
         return response()->json([
             "message" => "Title data is restored.",
-            "data" => new TitleResource($title)
+            "data" => TitleResource::make($title)
         ]);
     }
 }
