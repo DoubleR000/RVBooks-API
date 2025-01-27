@@ -36,7 +36,7 @@ class Title extends Model
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class, 'title_genre');
     }
 
     public function authors()

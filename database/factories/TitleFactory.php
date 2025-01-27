@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
+use App\Models\Genre;
+use App\Models\Title;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +27,41 @@ class TitleFactory extends Factory
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'publication_year' => fake()->year(),
-            'publisher' => fake()->company()
+            'publisher' => fake()->company(),
         ];
+    }
+
+    public function configure()
+    {
+
+        return $this->afterCreating(
+            function (Title $title) {
+
+                // Authors
+                $useExistingAuthors = fake()->boolean();
+                $numberOfAuthors = fake()->numberBetween(1, 3);
+
+                if ($useExistingAuthors) {
+                    $authors = Author::inRandomOrder()->limit($numberOfAuthors)->get();
+
+                    if ($authors->isEmpty()) {
+                        $title->authors()->attach(Author::factory($numberOfAuthors)->create());
+                    } else {
+                        $title->authors()->attach($authors);
+                    }
+
+                } else {
+                    $title->authors()->attach(Author::factory($numberOfAuthors)->create());
+                }
+
+
+                //Genres
+    
+                $numberOfGenres = fake()->numberBetween(1, 2);
+                $genres = Genre::inRandomOrder()->limit($numberOfGenres)->get();
+
+                $title->genres()->attach($genres);
+            }
+        );
     }
 }
