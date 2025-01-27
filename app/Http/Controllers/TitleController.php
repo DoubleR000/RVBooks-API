@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTitleRequest;
 use App\Http\Requests\UpdateTitleRequest;
 use App\Http\Resources\TitleResource;
-use App\Http\Services\TitleService;
-use App\Models\Author;
+use App\Services\TitleService;
 use App\Models\Title;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TitleController extends Controller
@@ -18,8 +16,22 @@ class TitleController extends Controller
      */
     public function index(Request $request)
     {
+        $query = Title::query();
+
+        if ($request->has('genre')) {
+            $query->filterByGenre($request->input('genre'));
+        }
+
+        if ($request->has('author')) {
+            $query->filterByAuthor($request->input('author'));
+        }
+
+        if ($request->has('year')) {
+            $query->filterByYear($request->input('year'));
+        }
+
         $itemsPerPage = $request->page_size ?? 20;
-        $titles = Title::with(['authors', 'genres'])->paginate($itemsPerPage);
+        $titles = $query->with(['authors', 'genres'])->paginate($itemsPerPage);
 
         return TitleResource::collection($titles);
     }

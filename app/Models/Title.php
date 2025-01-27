@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\QueryBuilders\TitleBuilder;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,4 +46,8 @@ class Title extends Model
     }
 
 
+    public function newEloquentBuilder($query): TitleBuilder
+    {
+        return new TitleBuilder($query);
+    }
 }
