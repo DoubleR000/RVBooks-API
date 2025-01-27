@@ -19,7 +19,7 @@ class TitleController extends Controller
     public function index(Request $request)
     {
         $itemsPerPage = $request->page_size ?? 20;
-        $titles = Title::with('authors')->paginate($itemsPerPage);
+        $titles = Title::with(['authors', 'genres'])->paginate($itemsPerPage);
 
         return TitleResource::collection($titles);
     }

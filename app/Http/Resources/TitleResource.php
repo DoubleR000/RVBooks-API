@@ -18,13 +18,19 @@ class TitleResource extends JsonResource
             'id' => $this->id,
             'isbn' => $this->isbn,
             'slug' => $this->slug,
-            'title' => $this->description,
+            'title' => $this->title,
+            'description' => $this->description,
+            'genres' => $this->whenLoaded(
+                'genres',
+                GenreResource::collection($this->genres)
+            ),
             'authors' => $this->whenLoaded(
                 'authors',
                 AuthorResource::collection($this->authors)
             ),
             'publisher' => $this->publisher,
-            'publication_year' => $this->publication_year
+            'publication_year' => $this->publication_year,
+
         ];
     }
 }
