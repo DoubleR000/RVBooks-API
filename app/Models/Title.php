@@ -7,11 +7,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\DeletedModels\Models\Concerns\KeepsDeletedModels;
 
 class Title extends Model
 {
-    use HasUuids, HasFactory, KeepsDeletedModels, Sluggable;
+    use HasUuids, HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
         'isbn',
