@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('title_genre', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Title::class)->constrained();
-            $table->foreignIdFor(\App\Models\Genre::class)->constrained();
+            $table->foreignIdFor(\App\Models\Title::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Genre::class)->constrained()->cascadeOnDelete();
         });
     }
 
