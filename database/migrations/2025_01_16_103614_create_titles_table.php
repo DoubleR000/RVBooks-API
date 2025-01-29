@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('publisher')->nullable();
             $table->year('publication_year')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
