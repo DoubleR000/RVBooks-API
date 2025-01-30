@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->dateTime('acquisition_date');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

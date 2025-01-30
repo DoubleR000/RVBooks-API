@@ -40,4 +40,4 @@ Route::apiResource('book-statuses', BookStatusController::class);
 Route::post('book-statuses/restore/{status}', [BookStatusController::class, 'restore'])->name('book-statuses.restore');
 
 Route::apiResource('books', BookController::class);
-Route::post('books/restore/{book}', [BookController::class, 'restore'])->name('books.restore');
+Route::post('books/{book}/restore', [BookController::class, 'restore'])->withTrashed()->name('books.restore');
