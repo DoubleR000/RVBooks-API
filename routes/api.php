@@ -21,7 +21,8 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth:sanctum');
 
 Route::apiResource('titles', TitleController::class);
-Route::post('titles/restore/{title}', [TitleController::class, 'restore'])->name('titles.restore');
+Route::post('titles/{title}/restore', [TitleController::class, 'restore'])->withTrashed()->name('titles.restore');
+Route::patch('titles/{title}/update-slug', [TitleController::class, 'updateSlug'])->name('titles.update-slug');
 
 Route::apiResource('authors', AuthorController::class);
 Route::post('authors/restore/{author}', [AuthorController::class, 'restore'])->name('authors.restore');
@@ -37,3 +38,6 @@ Route::post('book-conditions/restore/{condition}', [BookConditionController::cla
 
 Route::apiResource('book-statuses', BookStatusController::class);
 Route::post('book-statuses/restore/{status}', [BookStatusController::class, 'restore'])->name('book-statuses.restore');
+
+Route::apiResource('books', BookController::class);
+Route::post('books/restore/{book}', [BookController::class, 'restore'])->name('books.restore');

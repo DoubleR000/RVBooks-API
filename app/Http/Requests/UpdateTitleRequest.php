@@ -29,7 +29,9 @@ class UpdateTitleRequest extends FormRequest
             'publication_year' => 'date_format:Y|nullable',
             'publisher' => 'string|nullable',
             'author_ids' => 'array|nullable',
-            'author_ids.*' => 'exists:authors,id'
+            'author_ids.*' => 'exists:authors,id',
+            'genre_ids' => 'array|nullable',
+            'genre_ids.*' => 'exists:genres,id'
         ];
     }
 }

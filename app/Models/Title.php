@@ -19,7 +19,8 @@ class Title extends Model
         'title',
         'description',
         'publication_year',
-        'publisher'
+        'publisher',
+        'slug'
     ];
 
     public function sluggable(): array

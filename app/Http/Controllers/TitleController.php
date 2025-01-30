@@ -43,7 +43,7 @@ class TitleController extends Controller
     {
         $validated = $request->validated();
 
-        $title = $titleService->createTitleWithAuthor($validated);
+        $title = $titleService->createTitle($validated);
 
         return TitleResource::make($title);
     }
@@ -63,7 +63,7 @@ class TitleController extends Controller
     {
         $validated = $request->validated();
 
-        $titleService->updateTitleWithAuthor($title, $validated);
+        $titleService->updateTitle($title, $validated);
 
         return TitleResource::make($title);
     }
@@ -78,13 +78,25 @@ class TitleController extends Controller
         return response()->noContent();
     }
 
-    public function restore(int $id)
+    public function restore(Title $title)
     {
-        $title = Title::restore($id);
+
+        $title->restore();
 
         return response()->json([
             "message" => "Title data is restored.",
             "data" => TitleResource::make($title)
         ]);
+    }
+
+    public function updateSlug(Request $request, Title $title)
+    {
+        $validated = $request->validate([
+            'slug' => 'required|string|unique:titles,slug'
+        ]);
+
+        $title->update($validated);
+
+        return TitleResource::make($title);
     }
 }
