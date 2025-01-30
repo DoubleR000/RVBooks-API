@@ -12,10 +12,20 @@ return new class extends Migration {
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(App\Models\Title::class)->constrained();
-            $table->foreignIdFor(App\Models\Location::class)->constrained();
-            $table->foreignIdFor(App\Models\BookStatus::class)->constrained();
-            $table->foreignIdFor(App\Models\BookCondition::class)->constrained();
+            $table->foreignIdFor(App\Models\Title::class)
+                ->constrained();
+            $table->foreignIdFor(App\Models\Location::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
+            $table->foreignIdFor(App\Models\BookStatus::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
+            $table->foreignIdFor(App\Models\BookCondition::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->dateTime('acquisition_date');
 
             $table->timestamps();
