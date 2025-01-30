@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('isbn')->nullable()->unique();
             $table->string('slug')->unique();
-            $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('title')->fulltext();
+            $table->text('description')->nullable();
             $table->string('publisher')->nullable();
             $table->year('publication_year')->nullable();
             $table->timestamps();
