@@ -81,6 +81,18 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return response()->noContent();
+    }
+
+    public function restore(Book $book)
+    {
+        $book->restore();
+
+        return response()->json([
+            "message" => "Title data is restored.",
+            "data" => BookResource::make($book)
+        ]);
     }
 }
