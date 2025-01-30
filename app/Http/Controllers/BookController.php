@@ -22,7 +22,7 @@ class BookController extends Controller
         }
 
         if ($request->has("author")) {
-            // $query->filter
+            $query->filterByAuthor($request->input("author"));
         }
 
         if ($request->has("search")) {
