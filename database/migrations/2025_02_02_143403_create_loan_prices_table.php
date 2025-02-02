@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('loan_prices', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Title::class)->constrained();
+            $table->foreignIdFor(\App\Models\Title::class)->unique()->constrained();
             $table->string("rental_period_unit");
             $table->integer("rental_period_amount");
             $table->decimal("price", 8, 2);
