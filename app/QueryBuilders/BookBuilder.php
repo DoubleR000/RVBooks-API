@@ -20,10 +20,10 @@ class BookBuilder extends Builder
         });
     }
 
-    public function searchTitle(string $title)
+    public function search(string $text)
     {
-        return $this->whereHas('title', function ($query) use ($title) {
-            $query->whereFullText('title', $title);
+        return $this->whereHas('title', function ($query) use ($text) {
+            $query->whereFullText('title', sprintf("\"%s\"", $text));
         });
     }
 }
