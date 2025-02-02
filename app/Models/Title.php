@@ -52,6 +52,11 @@ class Title extends Model
         return $this->hasMany(Book::class);
     }
 
+    public function loanPrice()
+    {
+        return $this->hasOne(LoanPrice::class);
+    }
+
     public function newEloquentBuilder($query): TitleBuilder
     {
         return new TitleBuilder($query);
