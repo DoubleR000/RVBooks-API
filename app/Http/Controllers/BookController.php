@@ -17,19 +17,14 @@ class BookController extends Controller
     {
         $query = Book::query();
 
-        if ($request->has("genre")) {
-            $query->filterByGenre($request->input("genre"));
-        }
+        $query->when($request->input("genre"))
+            ->filterByGenre($request->input("genre"));
 
-        if ($request->has("author")) {
-            $query->filterByAuthor($request->input("author"));
-        }
+        $query->when($request->input("author"))
+            ->filterByAuthor($request->input("author"));
 
-        if ($request->has("search")) {
-            $query->searchTitle($request->input("search"));
-        }
-
-
+        $query->when($request->input("search"))
+            ->search($request->input("search"));
 
         $itemsPerPage = $request->page_size ?? 20;
         $books = $query->with([
