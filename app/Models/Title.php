@@ -47,6 +47,10 @@ class Title extends Model
         return $this->belongsToMany(Author::class, 'title_author');
     }
 
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 
     public function newEloquentBuilder($query): TitleBuilder
     {
