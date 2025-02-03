@@ -26,7 +26,7 @@ class StoreLoanPriceRequest extends FormRequest
             'rental_period_unit_id' => 'int|required|exists:rental_period_units,id',
             'rental_period_amount' => 'int|required',
             'price' => 'decimal:2|required',
-            'effective_from' => 'date_format:Y-m-d H:i:s'
+            'effective_from' => 'date_format:Y-m-d H:i:s|required'
         ];
     }
 }
