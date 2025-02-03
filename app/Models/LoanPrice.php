@@ -18,4 +18,9 @@ class LoanPrice extends Model
     {
         return $this->belongsTo(Title::class);
     }
+
+    public function rentalPeriodUnit()
+    {
+        return $this->belongsTo(RentalPeriodUnit::class);
+    }
 }
