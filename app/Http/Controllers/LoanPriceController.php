@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLoanPriceRequest;
+use App\Http\Requests\UpdateBookRequest;
+use App\Http\Requests\UpdateLoanPriceRequest;
 use App\Http\Resources\LoanPriceResource;
 use App\Models\LoanPrice;
 use Illuminate\Http\Request;
@@ -43,9 +45,13 @@ class LoanPriceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LoanPrice $loanPrice)
+    public function update(UpdateLoanPriceRequest $request, LoanPrice $loanPrice)
     {
-        //
+        $validated = $request->validated();
+
+        $loanPrice->update($validated);
+
+        return LoanPriceResource::make($loanPrice);
     }
 
     /**
