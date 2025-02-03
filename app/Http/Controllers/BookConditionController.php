@@ -63,10 +63,7 @@ class BookConditionController extends Controller
     {
         $bookCondition->delete();
 
-        return response()->json([
-            "message" => "Book Condition data is marked for deletion.",
-            "data" => BookConditionResource::make($bookCondition)
-        ]);
+        return response()->noContent();
     }
 
     public function restore(int $id)

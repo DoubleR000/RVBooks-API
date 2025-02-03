@@ -62,10 +62,7 @@ class GenreController extends Controller
     {
         $genre->delete();
 
-        return response()->json([
-            "message" => "Author data is marked for deletion.",
-            "data" => new GenreResource($genre)
-        ]);
+        return response()->noContent();
     }
 
     public function restore(int $id)

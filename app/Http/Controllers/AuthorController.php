@@ -62,10 +62,7 @@ class AuthorController extends Controller
     {
         $author->delete();
 
-        return response()->json([
-            "message" => "Author data is marked for deletion.",
-            "data" => new AuthorResource($author)
-        ]);
+        return response()->noContent();
     }
 
     public function restore(int $id)

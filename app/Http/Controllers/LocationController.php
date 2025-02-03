@@ -62,10 +62,7 @@ class LocationController extends Controller
     {
         $location->delete();
 
-        return response()->json([
-            "message" => "Location data is marked for deletion.",
-            "data" => new LocationResource($location)
-        ]);
+        return response()->noContent();
     }
 
     public function restore(int $id)
