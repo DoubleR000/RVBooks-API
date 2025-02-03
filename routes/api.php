@@ -6,6 +6,7 @@ use App\Http\Controllers\BookConditionController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\LoanPriceController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TitleController;
 use Illuminate\Http\Request;
@@ -34,10 +35,13 @@ Route::apiResource('locations', LocationController::class);
 Route::post('locations/restore/{location}', [LocationController::class, 'restore'])->name('locations.restore');
 
 Route::apiResource('book-conditions', BookConditionController::class);
-Route::post('book-conditions/restore/{condition}', [BookConditionController::class, 'restore'])->name('book-conditions.restore');
+Route::post('book-conditions/restore/{book_condition}', [BookConditionController::class, 'restore'])->name('book-conditions.restore');
 
 Route::apiResource('book-statuses', BookStatusController::class);
-Route::post('book-statuses/restore/{status}', [BookStatusController::class, 'restore'])->name('book-statuses.restore');
+Route::post('book-statuses/restore/{book_status}', [BookStatusController::class, 'restore'])->name('book-statuses.restore');
 
 Route::apiResource('books', BookController::class);
 Route::post('books/{book}/restore', [BookController::class, 'restore'])->withTrashed()->name('books.restore');
+
+Route::apiResource('loan-prices', LoanPriceController::class);
+Route::post('loan-prices/{loan_price}/restore', [LoanPriceController::class, 'restore'])->name('loan-prices.restore');
