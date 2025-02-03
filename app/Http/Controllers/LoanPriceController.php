@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLoanPriceRequest;
 use App\Http\Resources\LoanPriceResource;
 use App\Models\LoanPrice;
 use Illuminate\Http\Request;
@@ -22,9 +23,13 @@ class LoanPriceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLoanPriceRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $loanPrice = LoanPrice::create($validated);
+
+        return LoanPriceResource::make($loanPrice);
     }
 
     /**
@@ -32,7 +37,7 @@ class LoanPriceController extends Controller
      */
     public function show(LoanPrice $loanPrice)
     {
-        //
+        return LoanPriceResource::make($loanPrice);
     }
 
     /**
