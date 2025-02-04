@@ -14,6 +14,17 @@ class LoanPriceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'rental_duration_in_days' => $this->rental_duration_in_days,
+            'price' => $this->price,
+            'effective_from' => $this->effective_from,
+            'title_data' => $this->whenLoaded('title', [
+                'id' => $this->title->id,
+                'isbn' => $this->title->isbn,
+                'title' => $this->title->title,
+                'slug' => $this->title->slug,
+            ]),
+        ];
     }
 }
