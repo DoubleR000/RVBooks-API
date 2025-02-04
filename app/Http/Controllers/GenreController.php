@@ -70,7 +70,7 @@ class GenreController extends Controller
         $genre = Genre::restore($id);
 
         return response()->json([
-            "message" => "Author data is restored.",
+            "message" => "Genre data is restored.",
             "data" => new GenreResource($genre)
         ]);
     }
