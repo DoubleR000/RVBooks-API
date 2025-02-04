@@ -18,7 +18,10 @@ class LoanPriceFactory extends Factory
     public function definition(): array
     {
         return [
-            'rental_duration_in_days' => fake()->randomNumber(2),
+            'rental_duration_in_days' => fake()->randomElement([
+                7,
+                14,
+            ]),
             'price' => fake()->randomFloat(2, max: 100),
             'effective_from' => fake()->dateTimeThisYear()
         ];

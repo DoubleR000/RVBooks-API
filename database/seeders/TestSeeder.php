@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\LoanPrice;
 use App\Models\Title;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,8 +24,9 @@ class TestSeeder extends Seeder
         $this->call(BookConditionSeeder::class);
         $this->call(BookStatusSeeder::class);
 
-        Title::factory(50)->create();
+        Title::factory(50)
+            ->has(LoanPrice::factory())
+            ->create();
         Book::factory(200)->create();
-
     }
 }
