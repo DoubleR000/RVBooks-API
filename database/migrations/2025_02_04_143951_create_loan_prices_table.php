@@ -13,8 +13,7 @@ return new class extends Migration {
         Schema::create('loan_prices', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Title::class)->unique()->constrained();
-            $table->foreignIdFor(\App\Models\RentalPeriodUnit::class)->constrained();
-            $table->integer("rental_period_amount");
+            $table->integer("rental_duration_in_days");
             $table->decimal("price", 8, 2);
             $table->dateTime("effective_from");
             $table->timestamps();
