@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->decimal("price", 8, 2);
             $table->dateTime("effective_from");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

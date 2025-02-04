@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\DeletedModels\Models\Concerns\KeepsDeletedModels;
 
 class LoanPrice extends Model
 {
+    use SoftDeletes, HasFactory;
+
     protected $fillable = [
         "title_id",
         "rental_period_unit",
@@ -19,8 +24,4 @@ class LoanPrice extends Model
         return $this->belongsTo(Title::class);
     }
 
-    public function rentalPeriodUnit()
-    {
-        return $this->belongsTo(RentalPeriodUnit::class);
-    }
 }

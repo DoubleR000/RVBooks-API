@@ -64,13 +64,13 @@ class LoanPriceController extends Controller
         return response()->noContent();
     }
 
-    public function restore(int $id)
+    public function restore(LoanPrice $loanPrice)
     {
-        $genre = LoanPrice::restore($id);
+        $loanPrice->restore();
 
         return response()->json([
-            "message" => "Author data is restored.",
-            "data" => LoanPriceResource::make($genre)
+            "message" => "Loan Price data is restored.",
+            "data" => LoanPriceResource::make($loanPrice)
         ]);
     }
 }

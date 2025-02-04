@@ -44,4 +44,4 @@ Route::apiResource('books', BookController::class);
 Route::post('books/{book}/restore', [BookController::class, 'restore'])->withTrashed()->name('books.restore');
 
 Route::apiResource('loan-prices', LoanPriceController::class);
-Route::post('loan-prices/{loan_price}/restore', [LoanPriceController::class, 'restore'])->name('loan-prices.restore');
+Route::post('loan-prices/{loan_price}/restore', [LoanPriceController::class, 'restore'])->withTrashed()->name('loan-prices.restore');
