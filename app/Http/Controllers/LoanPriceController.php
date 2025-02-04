@@ -59,6 +59,18 @@ class LoanPriceController extends Controller
      */
     public function destroy(LoanPrice $loanPrice)
     {
-        //
+        $loanPrice->delete();
+
+        return response()->noContent();
+    }
+
+    public function restore(int $id)
+    {
+        $genre = LoanPrice::restore($id);
+
+        return response()->json([
+            "message" => "Author data is restored.",
+            "data" => LoanPriceResource::make($genre)
+        ]);
     }
 }
