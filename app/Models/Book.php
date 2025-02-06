@@ -19,6 +19,11 @@ class Book extends Model
         'acquisition_date'
     ];
 
+    public static function available()
+    {
+        return Book::where('book_status_id', 1)->get();
+    }
+
     public function title()
     {
         return $this->belongsTo(Title::class);
@@ -37,6 +42,11 @@ class Book extends Model
     public function status()
     {
         return $this->belongsTo(BookStatus::class, 'book_status_id', 'id');
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
     }
 
     public function newEloquentBuilder($query)
