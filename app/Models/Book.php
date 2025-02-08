@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\QueryBuilders\BookBuilder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,9 +20,9 @@ class Book extends Model
         'acquisition_date'
     ];
 
-    public static function available()
+    public static function scopeAvailable(Builder $query)
     {
-        return Book::where('book_status_id', 1)->get();
+        return $query->where('book_status_id', 1);
     }
 
     public function title()
