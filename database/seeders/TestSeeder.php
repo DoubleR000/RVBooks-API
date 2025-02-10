@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\LoanPrice;
 use App\Models\Title;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
@@ -17,7 +18,6 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
-        Artisan::call("migrate:fresh");
 
         $this->call(GenreSeeder::class);
         $this->call(LocationSeeder::class);
@@ -27,6 +27,8 @@ class TestSeeder extends Seeder
         Title::factory(50)
             ->has(LoanPrice::factory())
             ->create();
-        Book::factory(200)->create();
+        Book::factory(300)->create();
+
+        $this->call(RolePermissionSeeder::class);
     }
 }
