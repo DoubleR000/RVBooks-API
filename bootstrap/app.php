@@ -1,6 +1,7 @@
 <?php
 
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,5 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
             return response()->json([
                 'message' => 'Record not found.'
             ], 404);
+        });
+
+        $exceptions->render(function (AuthenticationException $exceptions) {
+            return response()->json([
+                'message' => 'Unauthenticated'
+            ], 403);
         });
     })->create();
