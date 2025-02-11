@@ -45,3 +45,23 @@ test('admin can store new author', function () {
                 $json->hasAll(['id', 'name'])
                     ->where('name', $name)));
 });
+
+test('returns 422 if name is already taken', function () {
+
+    $admin = User::factory()->admin()->create();
+    $name = "Admin Stored Author";
+
+    // Create Record
+    actingAs($admin)
+        ->postJson(route('authors.store'), ['name' => $name])
+        ->assertStatus(201)
+        ->assertJson(fn(AssertableJson $json) =>
+            $json->has('data', fn(AssertableJson $json) =>
+                $json->hasAll(['id', 'name'])
+                    ->where('name', $name)));
+
+    // Try to Store Author With Same Name
+    actingAs($admin)
+        ->postJson(route('authors.store'), ['name' => $name])
+        ->assertStatus(422);
+});
