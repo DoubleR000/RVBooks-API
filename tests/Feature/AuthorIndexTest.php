@@ -5,7 +5,7 @@ use Illuminate\Testing\Fluent\AssertableJson;
 use function Pest\Laravel\actingAs;
 
 test('unauthenticated user cannot view author list', function () {
-    $this->get(route('authors.index'))->assertStatus(401);
+    $this->getJson(route('authors.index'))->assertStatus(401);
 });
 
 
