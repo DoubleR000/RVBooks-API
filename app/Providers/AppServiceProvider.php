@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Author;
+use App\Policies\AuthorPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+        Gate::policy(Author::class, AuthorPolicy::class);
     }
 }
