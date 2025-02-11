@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AuthorResource;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AuthorController extends Controller
 {
@@ -13,6 +14,8 @@ class AuthorController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('viewAny', Author::class);
+
         $itemsPerPage = $request->page_size ?? 20;
         $authors = Author::paginate($itemsPerPage);
 
@@ -24,6 +27,8 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Author::class);
+
         $validated = $request->validate([
             'name' => 'string|required|unique:authors'
         ]);
@@ -38,6 +43,8 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
+        Gate::authorize('viewAny', Author::class);
+
         return new AuthorResource($author);
     }
 
@@ -46,6 +53,8 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
+        Gate::authorize('update', Author::class);
+
         $validated = $request->validate([
             'name' => 'string|unique:authors'
         ]);
@@ -60,6 +69,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+        Gate::authorize('delete', Author::class);
+
         $author->delete();
 
         return response()->noContent();
@@ -67,6 +78,8 @@ class AuthorController extends Controller
 
     public function restore(int $id)
     {
+        Gate::authorize('restore', Author::class);
+
         $author = Author::restore($id);
 
         return response()->json([
