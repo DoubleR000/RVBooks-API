@@ -16,12 +16,10 @@ test('admin can view author list', function () {
     actingAs($admin)
         ->getJson(route('authors.index'))
         ->assertStatus(200)
-        ->assertJson(
-            fn(AssertableJson $json) =>
+        ->assertJson(fn(AssertableJson $json) =>
             $json->hasAll(['data', 'links', 'meta'])
                 ->has('data.0', fn(AssertableJson $json) =>
-                    $json->hasAll(['id', 'name']))
-        );
+                    $json->hasAll(['id', 'name'])));
 });
 
 test('librarian can view author list', function () {
@@ -31,12 +29,10 @@ test('librarian can view author list', function () {
     actingAs($librarian)
         ->getJson(route('authors.index'))
         ->assertStatus(200)
-        ->assertJson(
-            fn(AssertableJson $json) =>
+        ->assertJson(fn(AssertableJson $json) =>
             $json->hasAll(['data', 'links', 'meta'])
                 ->has('data.0', fn(AssertableJson $json) =>
-                    $json->hasAll(['id', 'name']))
-        );
+                    $json->hasAll(['id', 'name'])));
 });
 
 test('patron can view author list', function () {
@@ -46,10 +42,8 @@ test('patron can view author list', function () {
     actingAs($patron)
         ->getJson(route('authors.index'))
         ->assertStatus(200)
-        ->assertJson(
-            fn(AssertableJson $json) =>
+        ->assertJson(fn(AssertableJson $json) =>
             $json->hasAll(['data', 'links', 'meta'])
                 ->has('data.0', fn(AssertableJson $json) =>
-                    $json->hasAll(['id', 'name']))
-        );
+                    $json->hasAll(['id', 'name'])));
 });
