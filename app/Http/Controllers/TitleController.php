@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class TitleController extends Controller
 {
+
+    public function __construct(private TitleService $titleService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -39,11 +44,11 @@ class TitleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTitleRequest $request, TitleService $titleService)
+    public function store(StoreTitleRequest $request)
     {
         $validated = $request->validated();
 
-        $title = $titleService->createTitle($validated);
+        $title = $this->titleService->createTitle($validated);
 
         return TitleResource::make($title);
     }
@@ -59,11 +64,11 @@ class TitleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTitleRequest $request, Title $title, TitleService $titleService)
+    public function update(UpdateTitleRequest $request, Title $title)
     {
         $validated = $request->validated();
 
-        $titleService->updateTitle($title, $validated);
+        $this->titleService->updateTitle($title, $validated);
 
         return TitleResource::make($title);
     }
