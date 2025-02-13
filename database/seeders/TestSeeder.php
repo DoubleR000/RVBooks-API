@@ -23,12 +23,17 @@ class TestSeeder extends Seeder
         $this->call(LocationSeeder::class);
         $this->call(BookConditionSeeder::class);
         $this->call(BookStatusSeeder::class);
+        $this->call(RolePermissionSeeder::class);
 
         Title::factory(50)
             ->has(LoanPrice::factory())
             ->create();
         Book::factory(300)->create();
 
-        $this->call(RolePermissionSeeder::class);
+        User::factory(2)->admin()->create();
+
+        User::factory(2)->librarian()->create();
+
+        User::factory(10)->patron()->withLoans(5)->create();
     }
 }
