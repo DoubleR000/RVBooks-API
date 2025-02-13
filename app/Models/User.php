@@ -48,4 +48,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function loans()
+    {
+        $this->hasMany(Loan::class);
+    }
+
+    public function scopeAdmins($query)
+    {
+        return $query->role('admin');
+    }
+
+    public function scopeLibrarian($query)
+    {
+        return $query->role('librarian');
+    }
+
+    public function scopeStaff($query)
+    {
+        return $query->role(['admin', 'librarian']);
+    }
 }
