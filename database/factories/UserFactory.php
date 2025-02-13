@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -61,6 +62,14 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) {
             $user->assignRole('patron');
+        });
+    }
+
+
+    public function withLoans(int $numberOfLoans)
+    {
+        return $this->afterCreating(function (User $user) use ($numberOfLoans) {
+            Loan::factory($numberOfLoans)->create(['user_id' => $user->id]);
         });
     }
 }
