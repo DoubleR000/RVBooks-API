@@ -136,7 +136,7 @@ class RolePermissionSeeder extends Seeder
             'restore-loan-prices',
 
             'view-loans',
-            'view-my-loans',
+            'view-own-loans',
             'create-loans',
             'edit-loans',
             'delete-loans',
@@ -148,7 +148,7 @@ class RolePermissionSeeder extends Seeder
             'view-genres',
             'view-titles',
             'view-books',
-            'view-my-loans',
+            'view-own-loans',
             'create-loans'
         ]);
     }
