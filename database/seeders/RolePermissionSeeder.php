@@ -67,7 +67,7 @@ class RolePermissionSeeder extends Seeder
             'restore-loan-prices',
 
             'view-loans',
-            'view-my-loans',
+            'view-own-loans',
             'create-loans',
             'edit-loans',
             'delete-loans',
