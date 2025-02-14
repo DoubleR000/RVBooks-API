@@ -22,4 +22,9 @@ class Loan extends Model
     {
         $this->belongsTo(User::class);
     }
+
+    public function book()
+    {
+        $this->belongsTo(Book::class);
+    }
 }
