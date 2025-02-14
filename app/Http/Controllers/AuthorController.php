@@ -35,7 +35,7 @@ class AuthorController extends Controller
 
         $author = Author::create($validated);
 
-        return new AuthorResource($author);
+        return AuthorResource::make($author);
     }
 
     /**
@@ -45,7 +45,7 @@ class AuthorController extends Controller
     {
         Gate::authorize('viewAny', Author::class);
 
-        return new AuthorResource($author);
+        return AuthorResource::make($author);
     }
 
     /**
@@ -61,7 +61,7 @@ class AuthorController extends Controller
 
         $author->update($validated);
 
-        return new AuthorResource($author);
+        return AuthorResource::make($author);
     }
 
     /**
@@ -82,9 +82,6 @@ class AuthorController extends Controller
 
         $author = Author::restore($id);
 
-        return response()->json([
-            "message" => "Author data is marked for deletion.",
-            "data" => new AuthorResource($author)
-        ]);
+        return AuthorResource::make($author);
     }
 }
