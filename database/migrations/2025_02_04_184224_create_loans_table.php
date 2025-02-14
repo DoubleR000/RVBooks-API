@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->date('due_date');
             $table->unsignedBigInteger('returned_by_staff');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('returned_by_staff')->references('id')->on('users');
         });
