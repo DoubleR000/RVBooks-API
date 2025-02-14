@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Author;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
 use function Pest\Laravel\actingAs;
@@ -49,19 +50,12 @@ test('admin can update author data', function () {
 test('returns 422 if name is already taken', function () {
 
     $admin = User::factory()->admin()->create();
-    $name = "Admin Stored Author";
 
-    // Create Record
-    actingAs($admin)
-        ->putJson(route('authors.update', [1]), ['name' => $name])
-        ->assertStatus(200)
-        ->assertJson(fn(AssertableJson $json) =>
-            $json->has('data', fn(AssertableJson $json) =>
-                $json->hasAll(['id', 'name'])
-                    ->where('name', $name)));
+    $author = Author::factory()->create([
+        'name' => 'Test Author'
+    ]);
 
-    // Try to Store Author With Same Name
     actingAs($admin)
-        ->putJson(route('authors.update', [1]), ['name' => $name])
+        ->putJson(route('authors.update', $author->id), ['name' => $author->name])
         ->assertStatus(422);
 });
