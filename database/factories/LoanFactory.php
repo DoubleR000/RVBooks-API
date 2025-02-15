@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Book;
+use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,11 +22,11 @@ class LoanFactory extends Factory
         $dueDate = fake()->date();
         $returnDate = fake()->dateTimeBetween('-14 days');
         return [
-            'book_id' => Book::available()->inRandomOrder()->first(),
-            'user_id' => User::inRandomOrder()->first(),
+            'book_id' => Book::available()->inRandomOrder()->first() ?? Book::factory()->create(),
+            'user_id' => User::inRandomOrder()->first() ?? User::factory(),
             'return_date' => $returnDate,
             'due_date' => $dueDate,
-            'returned_by_staff' => User::role(['librarian', 'admin'])->inRandomOrder()->first()
+            'returned_by_staff' => User::role(['librarian', 'admin'])->inRandomOrder()->first() ?? User::factory()->librarian()->create()
         ];
     }
 }
