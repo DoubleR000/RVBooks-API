@@ -17,7 +17,7 @@ class LoanController extends Controller
         $query = Loan::query();
         $loans = null;
 
-        if ($request->user()->hasRole('admin')) {
+        if ($request->user()->hasRole(['admin', 'librarian'])) {
             $loans = $query->with(['book', 'user'])->paginate($itemsPerPage);
         } else {
             $loans = $query->where('user_id', $request->user()->id)->with('book')->paginate($itemsPerPage);
