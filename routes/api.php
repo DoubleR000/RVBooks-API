@@ -6,6 +6,7 @@ use App\Http\Controllers\BookConditionController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoanPriceController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TitleController;
@@ -48,6 +49,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('loan-prices', LoanPriceController::class);
     Route::post('loan-prices/{loan_price}/restore', [LoanPriceController::class, 'restore'])->withTrashed()->name('loan-prices.restore');
+
+    Route::apiResource('loans', LoanController::class);
 });
 
 
