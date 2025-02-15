@@ -22,11 +22,11 @@ class LoanFactory extends Factory
         $dueDate = fake()->date();
         $returnDate = fake()->dateTimeBetween('-14 days');
         return [
-            'book_id' => Book::available()->inRandomOrder()->first() ?? Book::factory()->create(),
+            'book_id' => Book::available()->inRandomOrder()->first() ?? Book::factory(),
             'user_id' => User::inRandomOrder()->first() ?? User::factory(),
             'return_date' => $returnDate,
             'due_date' => $dueDate,
-            'returned_by_staff' => User::role(['librarian', 'admin'])->inRandomOrder()->first() ?? User::factory()->librarian()->create()
+            'returned_by_staff' => User::role(['librarian', 'admin'])->inRandomOrder()->first() ?? User::factory()->librarian()
         ];
     }
 }
