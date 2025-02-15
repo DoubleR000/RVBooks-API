@@ -21,7 +21,7 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title_id' => Title::inRandomOrder()->first()->id,
+            'title_id' => Title::inRandomOrder()->first()->id ?? Title::factory()->create(),
             'location_id' => Location::inRandomOrder()->first()->id,
             'book_status_id' => BookStatus::inRandomOrder()->first()->id,
             'book_condition_id' => BookCondition::inRandomOrder()->first()->id,
