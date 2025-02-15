@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LoanResource;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,18 @@ class LoanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $itemsPerPage = $request->page_size ?? 15;
+        $query = Loan::query();
+        $loans = null;
+
+        if ($request->user()->hasRole('admin')) {
+            $loans = $query->with(['book', 'user'])->paginate($itemsPerPage);
+        } else {
+            $loans = $query->where('user_id', $request->user()->id)->with('book')->paginate($itemsPerPage);
+        }
+        return LoanResource::collection($loans);
     }
 
     /**
