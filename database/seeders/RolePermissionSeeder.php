@@ -67,11 +67,12 @@ class RolePermissionSeeder extends Seeder
             'restore-loan-prices',
 
             'view-loans',
-            'view-own-loans',
+            'view-all-loans',
             'create-loans',
             'edit-loans',
             'delete-loans',
-            'restore-loans'
+            'restore-loans',
+            'force-delete-loans'
         ];
 
         foreach ($permissions as $permission) {
@@ -136,11 +137,12 @@ class RolePermissionSeeder extends Seeder
             'restore-loan-prices',
 
             'view-loans',
-            'view-own-loans',
+            'view-all-loans',
             'create-loans',
             'edit-loans',
             'delete-loans',
-            'restore-loans'
+            'restore-loans',
+            'force-delete-loans'
         ]);
 
         $roles['patron']->syncPermissions([
@@ -148,7 +150,7 @@ class RolePermissionSeeder extends Seeder
             'view-genres',
             'view-titles',
             'view-books',
-            'view-own-loans',
+            'view-loans',
             'create-loans'
         ]);
     }
