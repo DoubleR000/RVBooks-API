@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\LoanResource;
 use App\Models\Loan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class LoanController extends Controller
 {
@@ -13,15 +14,17 @@ class LoanController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('viewAny', Loan::class);
+
         $itemsPerPage = $request->page_size ?? 15;
         $query = Loan::query();
-        $loans = null;
 
-        if ($request->user()->hasRole(['admin', 'librarian'])) {
+        if ($request->user()->can('view-all-loans')) {
             $loans = $query->with(['book', 'user'])->paginate($itemsPerPage);
         } else {
             $loans = $query->where('user_id', $request->user()->id)->with('book')->paginate($itemsPerPage);
         }
+
         return LoanResource::collection($loans);
     }
 
@@ -30,15 +33,15 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Gate::authorize('create', Loan::class);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Loan $loan)
+    public function show(Request $request, Loan $loan)
     {
-        //
+
     }
 
     /**
@@ -46,7 +49,7 @@ class LoanController extends Controller
      */
     public function update(Request $request, Loan $loan)
     {
-        //
+        Gate::authorize('update', Loan::class);
     }
 
     /**
@@ -54,6 +57,6 @@ class LoanController extends Controller
      */
     public function destroy(Loan $loan)
     {
-        //
+        Gate::authorize('delete', Loan::class);
     }
 }
