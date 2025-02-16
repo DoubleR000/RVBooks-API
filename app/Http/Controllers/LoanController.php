@@ -41,7 +41,15 @@ class LoanController extends Controller
      */
     public function show(Request $request, Loan $loan)
     {
+        Gate::authorize('viewAny', Loan::class);
 
+        if ($request->user()->can('view-all-loans')) {
+            return LoanResource::make($loan);
+        }
+
+        Gate::authorize('view', $loan);
+
+        return LoanResource::make($loan);
     }
 
     /**
