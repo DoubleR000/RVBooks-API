@@ -19,7 +19,7 @@ class LoanPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Loan $loan): bool
+    public function viewOwn(User $user, Loan $loan): bool
     {
         return $user->id == $loan->user_id;
     }
