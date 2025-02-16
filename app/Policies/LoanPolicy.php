@@ -13,7 +13,7 @@ class LoanPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->can('view-loans');
     }
 
     /**
@@ -25,42 +25,50 @@ class LoanPolicy
     }
 
     /**
+     * Determine whether the user can view all models.
+     */
+    public function viewAll(User $user)
+    {
+        return $user->can('view-all-loans');
+    }
+
+    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['admin', 'librarian']);
+        return $user->can('create-loans');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Loan $loan): bool
+    public function update(User $user): bool
     {
-        return $user->hasRole(['admin', 'librarian']);
+        return $user->can('update-loans');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Loan $loan): bool
+    public function delete(User $user): bool
     {
-        return $user->hasRole(['admin', 'librarian']);
+        return $user->can('delete-loans');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Loan $loan): bool
+    public function restore(User $user): bool
     {
-        return $user->hasRole(['admin', 'librarian']);
+        return $user->can('restore-loans');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Loan $loan): bool
+    public function forceDelete(User $user): bool
     {
-        return $user->hasRole(['admin']);
+        return $user->can('force-delete-loans');
     }
 }
